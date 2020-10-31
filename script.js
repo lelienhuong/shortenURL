@@ -1,18 +1,3 @@
-restart=()=>{
-    var x = window.location.href;
-    var y = x;
-    var z;
-    while(y.indexOf("/")!==-1){
-       z = y.indexOf("/")
-       y = y.replace("/",".");
-    }
-    z++;
-    var t = x.substr(z,x.length)
-    if(t.length != 0){
-    //  alert(t)
-    //   window.location.href = "https://dsc-dut.herokuapp.com/"+t;
-    } 
-  }
 
 document
     .getElementById('submit-url')
@@ -32,12 +17,25 @@ document
         const yourJsonObject = {
              url : document.getElementById('input-url').value            
         }
-        window.fetch("https://dsc-dut.herokuapp.com/url", { 
+        var slug ='';
+        window.fetch("https://dsc-dut.herokuapp.com/url", {
             method: 'POST', 
-            body: JSON.stringify(yourJsonObject), 
-          }).then(res => console.log((res.json())))
-          .then(document.getElementById('output-url').value = window.location.href +3)
-            .catch(err=>console.log(err));
+            body: JSON.stringify({"url":document.getElementById('input-url').value}), 
+            headers:{
+                'Content-Type': 'application/json'
+            }
+            })
+            .then(res => res.json())
+            .then(response => slug = response.slug)
+            .then(response => document.getElementById('output-url').value = window.location.href + slug)
+            .catch(error => console.error('Error:', error))
+
+        // window.fetch("https://dsc-dut.herokuapp.com/url", { 
+        //     method: 'POST', 
+        //     body: JSON.stringify(yourJsonObject), 
+        //   }).then(res => console.log((res.json())))
+        //   .then(document.getElementById('output-url').value = window.location.href +3)
+        //     .catch(err=>console.log(err));
         //   .then(res=>console.log(res.dat)); 
 
           //        alert("xu" + document.getElementById('input-url').value);

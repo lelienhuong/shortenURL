@@ -6,6 +6,24 @@
   <title>Shorten URL</title>
   <link rel="stylesheet" href="style.css">
 </head>
+<script>
+  restart=()=>{
+    var x = window.location.href;
+    alert(x)
+    var y = x;
+    var z;
+    while(y.indexOf("/")!==-1){
+       z = y.indexOf("/")
+       y = y.replace("/",".");
+    }
+    z++;
+    var t = x.substr(z,x.length)
+    if(t.length != 0){
+     alert(t)
+    // window.location.href = "https://dsc-dut.herokuapp.com/"+t;
+    } 
+  }
+  </script>
 <body onload="restart()">
   <div id="app">
     <img class="logo" src="./img/DSC.png"/>
