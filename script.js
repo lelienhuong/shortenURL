@@ -9,7 +9,7 @@ restart = () => {
     z++;
     var t = x.substr(z, x.length)
     if (t.length != 0) {
-        // window.location.href = "https://dsc-dut.herokuapp.com/" + t;
+        window.location.href = "https://dsc-dut.herokuapp.com/" + t;
     }
 }
 
@@ -24,7 +24,7 @@ input.addEventListener("keyup", function (event) {
 
 checkNull = () => {
     var inputLink = document.getElementById('input-url').value;
-    inputLink = inputLink.trim()
+    inputLink = inputLink.trim();
     if (inputLink.indexOf(" ") !== -1 || inputLink.length == 0) {
         alert("Please input your link again!")
     } else {
@@ -39,7 +39,7 @@ checkNull = () => {
         var slug = '';
         window.fetch("https://dsc-dut.herokuapp.com/url", {
             method: 'POST',
-            body: JSON.stringify({ "url": document.getElementById('input-url').value }),
+            body: JSON.stringify({ "url": inputLink }),
             headers: {
                 'Content-Type': 'application/json'
             }
