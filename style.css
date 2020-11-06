@@ -1,7 +1,7 @@
 body{
     background-image: url("./img/bg-trim.svg");
     background-repeat: no-repeat;
-    background-size: 100% 720px;
+    background-size: cover;
   }
   
   .logo{
