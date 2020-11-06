@@ -1,4 +1,4 @@
-restart = () => {
+returnID = () => {
     var x = window.location.href;
     var y = x;
     var z;
@@ -21,9 +21,12 @@ input.addEventListener("keyup", function (event) {
         document.getElementById("submit-url").click();
     }
 });
-
-checkNull = () => {
-    var inputLink = document.getElementById('input-url').value;
+checkFormat=(myURL)=>{
+    var pattern = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)+[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gm;
+            return pattern.test(myURL);
+}
+checkNull = (inputLink) => {
+//    var inputLink = document.getElementById('input-url').value;
     inputLink = inputLink.trim();
     if (inputLink.indexOf(" ") !== -1 || inputLink.length == 0) {
         alert("Please input your link again!")
@@ -53,7 +56,16 @@ checkNull = () => {
 document
     .getElementById('submit-url')
     .addEventListener('click', function () {
-        checkNull();
+        var inputLink = document.getElementById('input-url').value;
+        if(checkFormat(inputLink)){
+            checkNull(inputLink);
+        }else{
+            if(checkFormat("https://"+inputLink)){
+                checkNull("https://"+inputLink);
+            }else{
+                alert("Please input your link again!");
+            }
+        }
     }
     )
     
