@@ -1,26 +1,19 @@
-returnID = () => {
-    var x = window.location.href;
-    var y = x;
-    var z;
-    while (y.indexOf("/") !== -1) {
-        z = y.indexOf("/")
-        y = y.replace("/", ".");
-    }
-    z++;
-    var t = x.substr(z, x.length)
-    if (t.length != 0) {
-        window.location.href = "https://dsc-dut.herokuapp.com/" + t;
-    }
-}
+// returnID = () => {
+//     var x = window.location.href;
+//     var y = x;
+//     var z;
+//     while (y.indexOf("/") !== -1) {
+//         z = y.indexOf("/")
+//         y = y.replace("/", ".");
+//     }
+//     z++;
+//     var t = x.substr(z, x.length)
+//     if (t.length != 0) {
+//         window.location.href = "https://dsc-dut.herokuapp.com/" + t;
+//     }
+// }
 
-var input = document
-    .getElementById('input-url')
-input.addEventListener("keyup", function (event) {
-    if (event.keyCode === 13) {
-        event.preventDefault();
-        document.getElementById("submit-url").click();
-    }
-});
+
 checkFormat=(myURL)=>{
     var pattern = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)+[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gm;
             return pattern.test(myURL);
@@ -31,13 +24,13 @@ checkNull = (inputLink) => {
     if (inputLink.indexOf(" ") !== -1 || inputLink.length == 0) {
         alert("Please input your link again!")
     } else {
-        var x = document.getElementById('shorten-output');
-        if (x.style.display === 'none') {
-            x.style.display = 'block';
-        } else {
-            x.style.display = 'none';
-            window.location.reload();
-        }
+        // var x = document.getElementById('shorten-output');
+        // if (x.style.display === 'none') {
+        //     x.style.display = 'block';   
+        // } else {
+        //     x.style.display = 'none';
+        //     window.location.reload();
+        // }
 
         var slug = '';
         window.fetch("https://dsc-dut.herokuapp.com/url", {
@@ -49,13 +42,14 @@ checkNull = (inputLink) => {
         })
             .then(res => res.json())
             .then(response => slug = response.slug)
-            .then(response => document.getElementById('output-url').value = window.location.href + slug)
+            .then(response => document.getElementById('output-url').value = "https://dsc-dut.herokuapp.com/" + slug)
             .catch(error => console.error('Error:', error))
     }
 }
 document
-    .getElementById('submit-url')
-    .addEventListener('click', function () {
+    .getElementById('form-submit')
+    .addEventListener('submit', function () {
+        event.preventDefault();
         var inputLink = document.getElementById('input-url').value;
         if(checkFormat(inputLink)){
             checkNull(inputLink);
